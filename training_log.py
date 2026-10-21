@@ -31,17 +31,31 @@ with sqlite3.connect(database_path) as connection:
             (name,)
         )
 
+    search = input(
+        "Search exercises (press Return for all): "
+    ).strip()
+
     exercises = connection.execute("""
         SELECT name
         FROM exercises
+        WHERE name LIKE ?
         ORDER BY id
-    """).fetchall()
+    """, ("%" + search + "%",)).fetchall()
     
-print("Weightlifting Exercise Library")
 print()
 
-for exercise in exercises:
-    print(exercise[0])
+if search:
+    print(f'Exercises matching "{search}"')
+else:
+    print("All exercises")
 
 print()
-print("Total exercises:", len(exercises))
+
+if len(exercises) == 0:
+    print("No matching exercises found.")
+else:
+    for exercise in exercises:
+        print(exercise[0])
+
+print()
+print("Matching exercises:", len(exercises))

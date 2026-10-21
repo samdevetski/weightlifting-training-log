@@ -10,6 +10,10 @@ training log. This first version stores an exercise library.
 - Displays exercises in their original insertion order.
 - Prevents duplicate exercise names across repeated runs.
 - Displays the total number of exercises.
+- Searches exercise names using partial text, ignoring capitalization.
+- Shows all exercises when the search is left blank.
+- Preserves workout order when displaying matches.
+- Displays a friendly message when no exercises match.
 
 ## Requirements
 
@@ -25,6 +29,24 @@ python3 training_log.py
 
 The program creates training_log.db alongside the script
 on its first run.
+
+When prompted, enter part of an exercise name:
+
+```text
+Search exercises (press Return for all): curl
+
+Exercises matching "curl"
+
+Bicep Curl
+Cross Body Curl
+
+Matching exercises: 2
+```
+
+Press Return without entering text to display all exercises.
+
+Search uses a parameterized SQL LIKE query. The % wildcard
+matches any sequence of characters; _ matches one character.
 
 ## Starter exercises
 
@@ -57,6 +79,9 @@ their original insertion order.
 - Confirmed all 12 exercises display in the intended order.
 - Ran the program again and confirmed the total remained 12.
 - Confirmed the database is excluded from Git.
+- Confirmed curl and CURL both return two matching exercises.
+- Confirmed an empty search displays all 12 exercises in workout order.
+- Confirmed swimming returns no matches and a count of zero.
 
 ## Data storage
 
