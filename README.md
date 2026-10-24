@@ -1,7 +1,7 @@
 # Weightlifting Training Log
 
-A Python and SQLite project for building a personal weightlifting
-training log. This first version stores an exercise library.
+A Python and SQLite command-line tool for searching an exercise
+library, recording dated weightlifting sets, and viewing saved history.
 
 ## Features
 
@@ -14,6 +14,11 @@ training log. This first version stores an exercise library.
 - Shows all exercises when the search is left blank.
 - Preserves workout order when displaying matches.
 - Displays a friendly message when no exercises match.
+- Optionally records a set using an exercise ID, weight in pounds, and reps.
+- Automatically dates new sets using the computer's current date.
+- Validates numeric input, exercise IDs, nonnegative weight, and positive reps.
+- Displays saved sets with exercise names, newest first.
+- Preserves workout records between program runs.
 
 ## Requirements
 
@@ -73,6 +78,9 @@ The exercises table contains:
 INSERT OR IGNORE prevents duplicate names.
 SELECT retrieves the exercises, and ORDER BY id preserves
 their original insertion order.
+The workout_sets table stores an ID, exercise ID, workout date,
+weight in pounds, and reps. A foreign key links each set to its
+exercise. A SQL JOIN retrieves exercise names for the history display.
 
 ## Checks performed
 
@@ -101,7 +109,11 @@ the script runs; it does not copy an existing database.
 
 ## Current limitations
 
-- No workout dates, sets, reps, or weights are recorded yet.
+- Records one set per program run.
+- New sets use today's date; backdated entries are not supported yet.
+- Saved sets cannot yet be edited or deleted.
+- Weight is recorded as entered; use a consistent convention for
+  per-dumbbell versus total weight.
 - Exercise names are defined in the source code.
 - Changing the source list order does not reorder existing records.
 - Runs in the terminal; phone access is a future improvement.
