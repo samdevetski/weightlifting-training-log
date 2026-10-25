@@ -221,3 +221,6 @@ __marimo__/
 
 # Local training database
 training_log.db
+
+# Personal workout exports
+exports/

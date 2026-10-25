@@ -103,6 +103,9 @@ exercise. A SQL JOIN retrieves exercise names for the history display.
 - Compared summary set counts and rep totals with saved history.
 - Confirmed viewing history does not change the totals.
 - Confirmed the summary is independent of the history filter.
+- Compared exported records with saved workout history.
+- Confirmed repeated exports replace the file without duplicating rows.
+- Confirmed exported files are excluded from Git.
 
 ## Data storage
 
@@ -120,6 +123,8 @@ the script runs; it does not copy an existing database.
 - Retrieving and ordering records.
 - Processing query results with a loop.
 - Aggregating records with SQL COUNT, SUM, and GROUP BY.
+- Writing CSV headers and records with Python's csv module.
+- Exporting joined SQL query results.
 
 ## Current limitations
 
@@ -140,3 +145,17 @@ exercises whose names contain curl.
 
 Press Return without typing to display all saved sets.
 Results show the newest workout dates and entries first.
+
+## Export workout history
+
+Enter y at the export prompt to save all recorded sets to:
+
+```text
+exports/workout_history.csv
+```
+
+The CSV contains date, exercise, weight_lb, and reps columns.
+It includes all saved sets, regardless of the history search.
+
+Each export replaces the previous CSV without changing the database.
+The exports folder is excluded from Git to keep personal records local.

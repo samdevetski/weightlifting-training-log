@@ -1,6 +1,7 @@
 import sqlite3
 from pathlib import Path
 from datetime import date
+import csv
 
 database_path = Path(__file__).parent / "training_log.db"
 
@@ -179,3 +180,39 @@ else:
             f"{exercise_name}: "
             f"{set_count} sets, {total_reps} total reps"
         )
+
+print()
+export_choice = input(
+    "Export all workout history to CSV? (y/n): "
+).strip().lower()
+
+if export_choice == "y":
+    export_folder = Path(__file__).parent / "exports"
+    export_folder.mkdir(exist_ok=True)
+
+    with sqlite3.connect(database_path) as connection:
+        export_rows = connection.execute("""
+            SELECT workout_sets.workout_date,
+                   exercises.name,
+                   workout_sets.weight_lb,
+                   workout_sets.reps
+            FROM workout_sets
+            JOIN exercises
+                ON workout_sets.exercise_id = exercises.id
+            ORDER BY workout_sets.workout_date DESC,
+                     workout_sets.id DESC
+        """).fetchall()
+
+    export_path = export_folder / "workout_history.csv"
+
+    with open(
+        export_path, "w", newline="", encoding="utf-8-sig"
+    ) as file:
+        writer = csv.writer(file)
+
+        writer.writerow([
+            "date", "exercise", "weight_lb", "reps"
+        ])
+        writer.writerows(export_rows)
+
+    print(f"Exported {len(export_rows)} sets to {export_path}")
