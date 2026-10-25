@@ -19,6 +19,10 @@ library, recording dated weightlifting sets, and viewing saved history.
 - Validates numeric input, exercise IDs, nonnegative weight, and positive reps.
 - Displays saved sets with exercise names, newest first.
 - Preserves workout records between program runs.
+- Filters saved workout history by partial exercise name.
+- Matches exercise names regardless of capitalization.
+- Shows all saved sets when the history search is blank.
+- Displays the number of matching sets and handles no matches.
 
 ## Requirements
 
@@ -90,6 +94,10 @@ exercise. A SQL JOIN retrieves exercise names for the history display.
 - Confirmed curl and CURL both return two matching exercises.
 - Confirmed an empty search displays all 12 exercises in workout order.
 - Confirmed swimming returns no matches and a count of zero.
+- Confirmed a partial exercise name filters saved history.
+- Confirmed uppercase input returns the same matches.
+- Confirmed a blank search displays all saved sets.
+- Confirmed a search with no matches displays a message and count of zero.
 
 ## Data storage
 
@@ -117,3 +125,12 @@ the script runs; it does not copy an existing database.
 - Exercise names are defined in the source code.
 - Changing the source list order does not reorder existing records.
 - Runs in the terminal; phone access is a future improvement.
+
+## Filter workout history
+
+After recording or skipping a set, enter part of an exercise name
+at the history prompt. For example, curl finds saved sets for
+exercises whose names contain curl.
+
+Press Return without typing to display all saved sets.
+Results show the newest workout dates and entries first.

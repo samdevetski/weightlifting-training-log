@@ -121,6 +121,10 @@ if record_set == "y":
 print()
 print("Saved sets")
 
+history_search = input(
+    "Filter history by exercise (press Return for all): "
+).strip()
+
 with sqlite3.connect(database_path) as connection:
     saved_sets = connection.execute("""
         SELECT workout_sets.workout_date,
@@ -130,12 +134,18 @@ with sqlite3.connect(database_path) as connection:
         FROM workout_sets
         JOIN exercises
             ON workout_sets.exercise_id = exercises.id
+        WHERE exercises.name LIKE ?
         ORDER BY workout_sets.workout_date DESC,
                  workout_sets.id DESC
-    """).fetchall()
+    """, ("%" + history_search + "%",)).fetchall()
+
+if history_search:
+    print(f'History matching "{history_search}"')
+else:
+    print("All workout history")
 
 if len(saved_sets) == 0:
-    print("No sets recorded yet.")
+    print("No saved sets match this search.")
 else:
     for saved_set in saved_sets:
         workout_date, exercise_name, weight_lb, reps = saved_set
@@ -144,3 +154,4 @@ else:
             f"{workout_date} | {exercise_name} | "
             f"{weight_lb:g} lb × {reps} reps"
         )
+print("Matching sets:", len(saved_sets))        
