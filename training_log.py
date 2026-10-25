@@ -155,3 +155,27 @@ else:
             f"{weight_lb:g} lb × {reps} reps"
         )
 print("Matching sets:", len(saved_sets))        
+
+print()
+print("Training summary")
+
+with sqlite3.connect(database_path) as connection:
+    summary = connection.execute("""
+        SELECT exercises.name,
+               COUNT(workout_sets.id),
+               SUM(workout_sets.reps)
+        FROM workout_sets
+        JOIN exercises
+            ON workout_sets.exercise_id = exercises.id
+        GROUP BY exercises.id, exercises.name
+        ORDER BY exercises.id
+    """).fetchall()
+
+if len(summary) == 0:
+    print("No sets recorded yet.")
+else:
+    for exercise_name, set_count, total_reps in summary:
+        print(
+            f"{exercise_name}: "
+            f"{set_count} sets, {total_reps} total reps"
+        )

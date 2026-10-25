@@ -23,6 +23,8 @@ library, recording dated weightlifting sets, and viewing saved history.
 - Matches exercise names regardless of capitalization.
 - Shows all saved sets when the history search is blank.
 - Displays the number of matching sets and handles no matches.
+- Summarizes all saved training data by exercise.
+- Displays the number of sets and total reps in workout order.
 
 ## Requirements
 
@@ -98,6 +100,9 @@ exercise. A SQL JOIN retrieves exercise names for the history display.
 - Confirmed uppercase input returns the same matches.
 - Confirmed a blank search displays all saved sets.
 - Confirmed a search with no matches displays a message and count of zero.
+- Compared summary set counts and rep totals with saved history.
+- Confirmed viewing history does not change the totals.
+- Confirmed the summary is independent of the history filter.
 
 ## Data storage
 
@@ -114,6 +119,7 @@ the script runs; it does not copy an existing database.
 - Preventing duplicates with a UNIQUE constraint.
 - Retrieving and ordering records.
 - Processing query results with a loop.
+- Aggregating records with SQL COUNT, SUM, and GROUP BY.
 
 ## Current limitations
 
