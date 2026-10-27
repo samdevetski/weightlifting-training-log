@@ -112,6 +112,8 @@ exercise. A SQL JOIN retrieves exercise names for the history display.
 - Compared exported records with saved workout history.
 - Confirmed repeated exports replace the file without duplicating rows.
 - Confirmed exported files are excluded from Git.
+- Confirmed exercise and workout-set counts match in the backup.
+- Confirmed a backup file is created and excluded from Git.
 
 ## Data storage
 
@@ -131,6 +133,8 @@ the script runs; it does not copy an existing database.
 - Aggregating records with SQL COUNT, SUM, and GROUP BY.
 - Writing CSV headers and records with Python's csv module.
 - Exporting joined SQL query results.
+- Creating SQLite backups and comparing record counts.
+- Generating timestamped filenames.
 
 ## Current limitations
 
@@ -165,3 +169,24 @@ It includes all saved sets, regardless of the history search.
 
 Each export replaces the previous CSV without changing the database.
 The exports folder is excluded from Git to keep personal records local.
+
+## Back up the database
+
+Run:
+
+```bash
+python3 backup_database.py
+```
+
+The script creates a timestamped copy of training_log.db
+inside the backups folder using SQLite's backup method.
+
+It displays exercise and workout-set counts from the original
+and backup databases for comparison. Matching counts are a
+basic check, not a complete integrity test.
+
+Each run creates a separate backup file. Backups are excluded
+from Git because they contain personal workout records.
+
+These backups remain on the same computer. Keep a separate copy
+elsewhere to protect against computer loss or drive failure.

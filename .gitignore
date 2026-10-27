@@ -224,3 +224,6 @@ training_log.db
 
 # Personal workout exports
 exports/
+
+# Personal database backups
+backups/
