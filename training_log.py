@@ -33,7 +33,8 @@ with sqlite3.connect(database_path) as connection:
             "INSERT OR IGNORE INTO exercises (name) VALUES (?)",
             (name,)
         )
-        connection.execute("""
+
+    connection.execute("""
         CREATE TABLE IF NOT EXISTS workout_sets (
             id INTEGER PRIMARY KEY,
             exercise_id INTEGER NOT NULL,
@@ -80,19 +81,35 @@ if record_set == "y":
     print("Record a set")
 
     try:
+        date_text = input(
+            "Workout date (YYYY-MM-DD; Return for today): "
+        ).strip()
+
+        if date_text == "":
+            workout_date = date.today().isoformat()
+        else:
+            workout_date = date.fromisoformat(date_text).isoformat()
+
+            if workout_date != date_text:
+                raise ValueError("Use YYYY-MM-DD.")
+
         exercise_id = int(input("Exercise ID: "))
         weight_lb = float(input("Weight used (lb): "))
         reps = int(input("Reps completed: "))
 
     except ValueError:
-        print("Enter whole numbers for ID and reps, and a number for weight.")
+        print(
+            "Enter a valid date as YYYY-MM-DD, whole numbers "
+            "for ID and reps, and a number for weight."
+        )
 
     else:
         if weight_lb < 0 or reps <= 0:
-            print("Weight cannot be negative, and reps must be greater than zero.")
+            print(
+                "Weight cannot be negative, "
+                "and reps must be greater than zero."
+            )
         else:
-            workout_date = date.today().isoformat()
-
             with sqlite3.connect(database_path) as connection:
                 connection.execute("PRAGMA foreign_keys = ON")
 
@@ -116,8 +133,8 @@ if record_set == "y":
                         reps
                     ))
 
-        if exercise is not None:
-            print("Set saved!")
+            if exercise is not None:
+                print("Set saved!")
             
 print()
 print("Saved sets")

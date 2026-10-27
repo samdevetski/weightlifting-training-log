@@ -25,6 +25,9 @@ library, recording dated weightlifting sets, and viewing saved history.
 - Displays the number of matching sets and handles no matches.
 - Summarizes all saved training data by exercise.
 - Displays the number of sets and total reps in workout order.
+- Accepts a workout date in YYYY-MM-DD format.
+- Uses today's date when the date input is blank.
+- Rejects invalid dates before saving a set.
 
 ## Requirements
 
@@ -58,6 +61,9 @@ Press Return without entering text to display all exercises.
 
 Search uses a parameterized SQL LIKE query. The % wildcard
 matches any sequence of characters; _ matches one character.
+
+When recording a set, enter its workout date as YYYY-MM-DD,
+or press Return to use today's date.
 
 ## Starter exercises
 
