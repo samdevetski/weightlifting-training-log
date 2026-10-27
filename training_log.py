@@ -233,3 +233,28 @@ if export_choice == "y":
         writer.writerows(export_rows)
 
     print(f"Exported {len(export_rows)} sets to {export_path}")
+
+print()
+print("Training by date")
+
+with sqlite3.connect(database_path) as connection:
+    daily_summary = connection.execute("""
+        SELECT workout_date,
+               COUNT(DISTINCT exercise_id),
+               COUNT(*),
+               SUM(reps)
+        FROM workout_sets
+        GROUP BY workout_date
+        ORDER BY workout_date DESC
+    """).fetchall()
+
+if len(daily_summary) == 0:
+    print("No training recorded yet.")
+else:
+    for workout_date, exercise_count, set_count, total_reps in daily_summary:
+        print(
+            f"{workout_date} | "
+            f"{exercise_count} exercises | "
+            f"{set_count} sets | "
+            f"{total_reps} reps"
+        )

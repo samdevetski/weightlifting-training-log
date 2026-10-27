@@ -28,6 +28,10 @@ library, recording dated weightlifting sets, and viewing saved history.
 - Accepts a workout date in YYYY-MM-DD format.
 - Uses today's date when the date input is blank.
 - Rejects invalid dates before saving a set.
+- Summarizes training by date, showing distinct exercises,
+  recorded sets, and total reps.
+- Displays the newest dates first.
+- Combines all sets recorded on the same calendar date.
 
 ## Requirements
 
@@ -114,6 +118,8 @@ exercise. A SQL JOIN retrieves exercise names for the history display.
 - Confirmed exported files are excluded from Git.
 - Confirmed exercise and workout-set counts match in the backup.
 - Confirmed a backup file is created and excluded from Git.
+- Compared daily exercise, set, and rep totals with saved history.
+- Confirmed viewing records does not change summary totals.
 
 ## Data storage
 
@@ -135,6 +141,8 @@ the script runs; it does not copy an existing database.
 - Exporting joined SQL query results.
 - Creating SQLite backups and comparing record counts.
 - Generating timestamped filenames.
+- Grouping records by date with SQL GROUP BY.
+- Counting distinct exercises with COUNT(DISTINCT exercise_id).
 
 ## Current limitations
 
