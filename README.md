@@ -198,3 +198,39 @@ from Git because they contain personal workout records.
 
 These backups remain on the same computer. Keep a separate copy
 elsewhere to protect against computer loss or drive failure.
+
+## Browser workout viewer
+
+View recorded workouts in a local Streamlit app.
+
+Features:
+- Displays workout date, exercise, weight in pounds, and reps.
+- Shows the newest workouts first.
+- Opens the database in read-only mode.
+- Displays a helpful message when the database or workout history is empty.
+
+### Run on macOS
+
+Open a terminal in the repository folder.
+
+Create a virtual environment once:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it and install dependencies:
+
+```bash
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+Start the viewer:
+
+```bash
+python -m streamlit run app.py
+```
+
+The viewer uses the local `training_log.db` created by
+`training_log.py`. Personal workout data is excluded from GitHub.
