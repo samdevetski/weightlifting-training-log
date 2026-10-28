@@ -234,3 +234,12 @@ python -m streamlit run app.py
 
 The viewer uses the local `training_log.db` created by
 `training_log.py`. Personal workout data is excluded from GitHub.
+
+### Filter workout history
+
+Use the “Choose an exercise” dropdown to view all workouts
+or only sets for one exercise.
+
+- Exercises appear in the training order.
+- The viewer displays the number of matching sets.
+- A helpful message appears when no sets match.
