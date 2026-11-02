@@ -227,3 +227,5 @@ exports/
 
 # Personal database backups
 backups/
+
+demo_training_log.db

@@ -263,3 +263,33 @@ and the weight and reps for each set from that day.
 - This section uses the full history, regardless of the date filter.
 - Exercises without recorded sets display a helpful message.
 - Selecting “All exercises” hides this section.
+
+### Fictional workout demo
+
+Demo mode lets you explore the app using fictional workouts
+instead of personal training records.
+
+Create the demo database:
+
+```bash
+python3 create_demo_database.py
+```
+
+Start the app:
+
+```bash
+python -m streamlit run app.py
+```
+
+Check “Demo mode — fictional workouts” to explore the sample data.
+
+The demo includes:
+- Six sets across two workout dates.
+- Military Press and Weighted Row workouts.
+- Bicep Curl with no recorded sets, demonstrating empty results.
+
+Rerunning the setup script does not duplicate demo records.
+
+Demo mode switches between separate local databases.
+It is not an access-control feature. Personal training data
+must remain excluded from GitHub and public deployments.

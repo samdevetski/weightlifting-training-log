@@ -6,10 +6,19 @@ import streamlit as st
 st.title("Weightlifting Training Log")
 st.write("Review your recorded workouts.")
 
-database_path = Path(__file__).parent / "training_log.db"
+demo_mode = st.checkbox("Demo mode — fictional workouts")
+
+if demo_mode:
+    database_path = Path(__file__).parent / "demo_training_log.db"
+    st.info("Demo mode: all displayed workouts are fictional.")
+else:
+    database_path = Path(__file__).parent / "training_log.db"
 
 if not database_path.exists():
-    st.warning("No training database found. Record a set using training_log.py first.")
+    if demo_mode:
+        st.warning("Run create_demo_database.py to create the demo workouts.")
+    else:
+        st.warning("No training database found. Record a set using training_log.py first.")
     st.stop()
 
 with sqlite3.connect(
