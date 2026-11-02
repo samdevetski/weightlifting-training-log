@@ -33,6 +33,21 @@ with sqlite3.connect(
         exercise_options
     )
     
+    workout_dates = connection.execute("""
+        SELECT DISTINCT workout_date
+        FROM workout_sets
+        ORDER BY workout_date DESC
+    """).fetchall()
+
+    date_options = ["All dates"] + [
+        workout["workout_date"] for workout in workout_dates
+    ]
+
+    selected_date = st.selectbox(
+        "Choose a workout date",
+        date_options
+    )
+    
     saved_sets = connection.execute("""
         SELECT workout_sets.workout_date AS Date,
                exercises.name AS Exercise,
@@ -42,9 +57,15 @@ with sqlite3.connect(
         JOIN exercises
             ON workout_sets.exercise_id = exercises.id
         WHERE (? = 'All exercises' OR exercises.name = ?)
+          AND (? = 'All dates' OR workout_sets.workout_date = ?)
         ORDER BY workout_sets.workout_date DESC,
                  workout_sets.id DESC
-    """, (selected_exercise, selected_exercise)).fetchall()
+    """, (
+        selected_exercise,
+        selected_exercise,
+        selected_date,
+        selected_date
+    )).fetchall()
 
 st.write(f"Matching sets: {len(saved_sets)}")
 

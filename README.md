@@ -243,3 +243,13 @@ or only sets for one exercise.
 - Exercises appear in the training order.
 - The viewer displays the number of matching sets.
 - A helpful message appears when no sets match.
+
+### Filter by workout date
+
+Use “Choose a workout date” to view one day’s recorded sets
+or select “All dates” to view your full history.
+
+- Dates appear newest first.
+- Date and exercise filters work together.
+- The matching set count updates with your selections.
+- A helpful message appears when no sets match.
