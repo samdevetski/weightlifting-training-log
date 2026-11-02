@@ -253,3 +253,13 @@ or select “All dates” to view your full history.
 - Date and exercise filters work together.
 - The matching set count updates with your selections.
 - A helpful message appears when no sets match.
+
+### Most recent workout
+
+Select an exercise to see its latest recorded workout date
+and the weight and reps for each set from that day.
+
+- Sets appear in the order they were recorded.
+- This section uses the full history, regardless of the date filter.
+- Exercises without recorded sets display a helpful message.
+- Selecting “All exercises” hides this section.

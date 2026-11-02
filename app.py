@@ -33,6 +33,38 @@ with sqlite3.connect(
         exercise_options
     )
     
+    if selected_exercise != "All exercises":
+        latest_date = connection.execute("""
+            SELECT MAX(workout_sets.workout_date)
+            FROM workout_sets
+            JOIN exercises
+                ON workout_sets.exercise_id = exercises.id
+            WHERE exercises.name = ?
+        """, (selected_exercise,)).fetchone()[0]
+
+        if latest_date is None:
+            st.info("No sets recorded for this exercise yet.")
+        else:
+            st.subheader("Most recent workout")
+            st.write(f"{selected_exercise} — {latest_date}")
+            st.caption("Based on your full history, regardless of the date filter.")
+
+            latest_sets = connection.execute("""
+                SELECT workout_sets.weight_lb AS "Weight (lb)",
+                       workout_sets.reps AS Reps
+                FROM workout_sets
+                JOIN exercises
+                    ON workout_sets.exercise_id = exercises.id
+                WHERE exercises.name = ?
+                  AND workout_sets.workout_date = ?
+                ORDER BY workout_sets.id
+            """, (selected_exercise, latest_date)).fetchall()
+
+            st.dataframe(
+                [dict(workout_set) for workout_set in latest_sets],
+                hide_index=True
+            )   
+    
     workout_dates = connection.execute("""
         SELECT DISTINCT workout_date
         FROM workout_sets
