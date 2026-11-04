@@ -312,3 +312,21 @@ This version:
 The personal viewer remains available through `app.py`.
 The standalone demo currently runs locally; online hosting
 is a separate step.
+
+### Live conference demo
+
+[Open the workout demo](https://sam-weightlifting-training-log.streamlit.app/)
+
+The hosted demo uses fictional workouts only. It supports:
+- Filtering by exercise and workout date.
+- Viewing the latest recorded workout for an exercise.
+- Displaying helpful messages when no sets match.
+
+The app runs on Streamlit Community Cloud and does not require
+the local app to be running on my computer.
+
+#### Current status
+
+The hosted demo has loaded successfully on desktop.
+Phone access is still being tested: the page currently remains
+on the loading screen.
