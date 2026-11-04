@@ -327,6 +327,6 @@ the local app to be running on my computer.
 
 #### Current status
 
-The hosted demo has loaded successfully on desktop.
-Phone access is still being tested: the page currently remains
-on the loading screen.
+Verified on desktop and iPhone Safari.
+The demo uses static tables for reliable display.
+Exercise and date filters remain interactive.
