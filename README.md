@@ -293,3 +293,22 @@ Rerunning the setup script does not duplicate demo records.
 Demo mode switches between separate local databases.
 It is not an access-control feature. Personal training data
 must remain excluded from GitHub and public deployments.
+
+### Standalone conference demo
+
+Run the demo-only viewer:
+
+```bash
+python -m streamlit run demo_app.py
+```
+
+This version:
+- Uses only fictional workout data.
+- Creates the demo database automatically when it is missing.
+- Supports exercise and date filters.
+- Shows the selected exercise’s latest recorded workout.
+- Has no option to switch to personal records.
+
+The personal viewer remains available through `app.py`.
+The standalone demo currently runs locally; online hosting
+is a separate step.
