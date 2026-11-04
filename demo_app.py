@@ -64,10 +64,9 @@ with sqlite3.connect(
                 ORDER BY workout_sets.id
             """, (selected_exercise, latest_date)).fetchall()
 
-            st.dataframe(
-                [dict(workout_set) for workout_set in latest_sets],
-                hide_index=True
-            )   
+            st.table(
+                [dict(workout_set) for workout_set in latest_sets]
+            ) 
     
     workout_dates = connection.execute("""
         SELECT DISTINCT workout_date
