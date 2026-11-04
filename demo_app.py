@@ -108,7 +108,6 @@ st.write(f"Matching sets: {len(saved_sets)}")
 if not saved_sets:
     st.info("No recorded sets match this selection.")
 else:
-    st.dataframe(
-        [dict(saved_set) for saved_set in saved_sets],
-        hide_index=True
+    st.table(
+        [dict(saved_set) for saved_set in saved_sets]
     )
